@@ -102,7 +102,7 @@ export const routes = [
   {
     method: 'POST',
     path: buildRoutePath('/tasks/csv'),
-    handler: async (req, res) => {
+    handler: (req, res) => {
       const tasks = req.body;
 
       for (const task of tasks) {
