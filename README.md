@@ -112,5 +112,5 @@ Content-Type: application/json
 #### Parâmetros do Corpo
 
 | Parâmetro     | Tipo     |  Descrição                          |
-| ------------- | -------- | ----------------------------------- |   |
+| ------------- | -------- | ----------------------------------- |
 | `id` | `string` | **Obrigatório**. ID da task para a edição|
