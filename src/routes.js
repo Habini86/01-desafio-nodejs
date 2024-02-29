@@ -45,6 +45,34 @@ export const routes = [
     }
   },
   {
+    method: 'POST',
+    path: buildRoutePath('/tasks/csv'),
+    handler: (req, res) => {
+      const tasks = req.body;
+
+      for (const task of tasks) {
+        const { title, description } = task;
+
+        if (typeof(title || description) === 'undefined') {
+          return res.writeHead(400).end(`Title and/or description are required\nObject: ${task}`)
+        }
+
+        const newTask = {
+          id: randomUUID(),
+          title,
+          description,
+          created_at: dateNow(),
+          update_at: dateNow(),
+          completed_at: null
+        };
+  
+        database.insert('tasks', newTask);
+      }
+  
+      return res.writeHead(201).end();
+    }
+  },  
+  {
     method: 'PUT',
     path: buildRoutePath('/tasks/:id'),
     handler: (req, res) => {
@@ -97,33 +125,5 @@ export const routes = [
 
       return res.writeHead(204).end()
     }
-  },
-  {
-    method: 'POST',
-    path: buildRoutePath('/tasks/csv'),
-    handler: (req, res) => {
-      const tasks = req.body;
-
-      for (const task of tasks) {
-        const { title, description } = task;
-
-        if (typeof(title || description) === 'undefined') {
-          return res.writeHead(400).end(`Title and/or description are required\nObject: ${task}`)
-        }
-
-        const newTask = {
-          id: randomUUID(),
-          title,
-          description,
-          created_at: dateNow(),
-          update_at: dateNow(),
-          completed_at: null
-        };
-  
-        database.insert('tasks', newTask);
-      }
-  
-      return res.writeHead(201).end();
-    }
-  }  
+  }
 ]
