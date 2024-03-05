@@ -23,7 +23,7 @@ const server = http.createServer(async (req, res) => {
     return route.handler(req, res)
   }
 
-  return res.writeHead(404).end('Not Found')
+  return res.writeHead(404).end('{"error": "Resource not found"}')
 })
 
 server.listen(4444)

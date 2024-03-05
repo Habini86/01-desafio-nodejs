@@ -26,8 +26,8 @@ export const routes = [
     handler: (req, res) => {
       const { title, description } = req.body
 
-      if (typeof(title || description) === 'undefined') {
-        return res.writeHead(400).end('Title and/or description are required')
+      if (typeof(title) === 'string' && typeof(description) === 'string') {
+        return res.writeHead(400).end('{"error": "Title and description are required & must be string"}')
       }
 
       const task = {
@@ -53,8 +53,8 @@ export const routes = [
       for (const task of tasks) {
         const { title, description } = task;
 
-        if (typeof(title || description) === 'undefined') {
-          return res.writeHead(400).end(`Title and/or description are required\nObject: ${task}`)
+        if (!(typeof(title) === 'string' && typeof(description) === 'string')) {
+          return res.writeHead(400).end('{"error": "Title and description are required & must be string"}')
         }
 
         const newTask = {
@@ -82,7 +82,11 @@ export const routes = [
       let { title, description } = req.body
 
       if (typeof(title || description) === 'undefined') {
-        return res.writeHead(400).end('Title and/or description are required')
+        return res.writeHead(400).end('{"error": "Title and/or description are required"}')
+      }
+
+      if (typeof(title) === 'string' || typeof(description) === 'string') {
+        return res.writeHead(400).end('{"error": "Title and/or description must be string"}')
       }
 
       title = title ?? database.select('tasks', id, 'title')
@@ -106,7 +110,7 @@ export const routes = [
     handler: (req, res) => {
       const { id } = req.params
 
-      if(!(database.select('tasks', id, 'id') === id)){return res.writeHead(404).end('ID not found')}
+      if(!(database.select('tasks', id, 'id') === id)){return res.writeHead(404).end('{"error": "ID not found"}')}
 
       database.delete('tasks', id)
 
@@ -119,7 +123,7 @@ export const routes = [
     handler: (req, res) => {
       const { id } = req.params
 
-      if(!(database.select('tasks', id, 'id') === id)){return res.writeHead(404).end('ID not found')}
+      if(!(database.select('tasks', id, 'id') === id)){return res.writeHead(404).end('{"error": "ID not found"}')}
 
       database.update('tasks', id, dateNow())
 
