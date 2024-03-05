@@ -68,6 +68,7 @@ Task 05,Descrição da Task 05
 GET /task HTTP/1.1
 Host: exemplo.com
 Content-Type: application/json
+
 {
   "error": "Resource not found"
 }
@@ -88,6 +89,7 @@ Content-Type: application/json
 GET /tasks HTTP/1.1
 Host: exemplo.com
 Content-Type: application/json
+
 {
   "items": [
     {
@@ -129,6 +131,7 @@ Content-Type: application/json
 GET /tasks?search HTTP/1.1
 Host: exemplo.com
 Content-Type: application/json
+
 {
   "items": [
     {
@@ -157,6 +160,7 @@ Content-Type: application/json
 GET /tasks?search=aplicati HTTP/1.1
 Host: exemplo.com
 Content-Type: application/json
+
 {
   "items": [
     {
@@ -306,7 +310,7 @@ Task 05,Descrição da Task 05
 ### Example Body
 
 ```http
-POST /tasks/id:71f40a9a-6dee-4908-af1b-77242180b259 HTTP/1.1
+PUT /tasks/id:71f40a9a-6dee-4908-af1b-77242180b259 HTTP/1.1
 Host: exemplo.com
 Content-Type: application/json
 
@@ -316,7 +320,7 @@ Content-Type: application/json
 ```
 
 ```http
-POST /tasks/id:71f40a9a-6dee-4908-af1b-77242180b259 HTTP/1.1
+PUT /tasks/id:71f40a9a-6dee-4908-af1b-77242180b259 HTTP/1.1
 Host: exemplo.com
 Content-Type: application/json
 
@@ -326,7 +330,7 @@ Content-Type: application/json
 ```
 
 ```http
-POST /tasks/id:71f40a9a-6dee-4908-af1b-77242180b259 HTTP/1.1
+PUT /tasks/id:71f40a9a-6dee-4908-af1b-77242180b259 HTTP/1.1
 Host: exemplo.com
 Content-Type: application/json
 
