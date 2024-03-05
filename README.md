@@ -1,45 +1,140 @@
-# 01-desafio-nodejs
 
-Foi desenvolvido uma API para realizar o CRUD de tasks (tarefas).
-## Documentação da API
+# Documentação da API
 
-### Retorna todos os itens
+## Retorna todos os itens
 
-```http
-  GET /tasks
+### Request
+
+- Método: `GET`
+- Rota: `/tasks`
+
+### Example Response
+
+#### Resolve (Status Code 200)
+
+```json
+{
+  "items": [
+    {
+      "id": "71f40a9a-6dee-4908-af1b-77242180b259",
+      "title": "Reunião de Planejamento",
+      "description": "Participar da reunião de planejamento semanal com a equipe para discutir as metas e tarefas da próxima semana",
+      "created_at": "28/02/2024 17h27",
+      "update_at": "28/02/2024 17h27",
+      "completed_at": null
+    },
+    {
+      "id": "bbd7dfea-3d9c-480e-b167-9a9e86b64f35",
+      "title": "Desenvolvimento de Recursos",
+      "description": "Trabalhar no desenvolvimento do novo recurso de autenticação para o aplicativo móvel",
+      "created_at": "28/02/2024 17h27",
+      "update_at": "28/02/2024 17h27",
+      "completed_at": "complete"
+    }
+  ]
+}
 ```
 
-### Retorna os valores correspondetes
-
-```http
-  GET /tasks?search=${value}
+#### Reject (Status Code 404)
+```json
+{
+  "error": "Resource not found"
+}
 ```
 
-| Parâmetro   | Tipo       | Descrição                           |
-| :---------- | :--------- | :---------------------------------- |
-| `value` | `string` | **Opcional**. Filtra o title e o description pelo value |
+## Retorna os valores correspondentes
 
-### Envia o json pelo body da requisição
-```http
-  POST /tasks
+### Request
+
+- Método: `GET`
+- Rota: `/tasks?search=${value}`
+
+#### Parameters
+
+- `value` (opcional): Filtra o título e a descrição pelo valor especificado.
+
+### Example Response
+
+#### Resolve (Status Code 200)
+
+```json
+{
+  "items": [
+    {
+      "id": "71f40a9a-6dee-4908-af1b-77242180b259",
+      "title": "Reunião de Planejamento",
+      "description": "Participar da reunião de planejamento semanal com a equipe para discutir as metas e tarefas da próxima semana",
+      "created_at": "28/02/2024 17h27",
+      "update_at": "28/02/2024 17h27",
+      "completed_at": null
+    },
+    {
+      "id": "bbd7dfea-3d9c-480e-b167-9a9e86b64f35",
+      "title": "Desenvolvimento de Recursos",
+      "description": "Trabalhar no desenvolvimento do novo recurso de autenticação para o aplicativo móvel",
+      "created_at": "28/02/2024 17h27",
+      "update_at": "28/02/2024 17h27",
+      "completed_at": null
+    }
+  ]
+}
 ```
 
-#### Parâmetros do Corpo
+#### Reject (Status Code 404)
 
-| Parâmetro     | Tipo     |  Descrição                          |
+```json
+{
+  "error": "Resource not found"
+}
+```
+
+## Envia o JSON pelo corpo da requisição
+
+### Request
+
+- Método: `POST`
+- Rota: `/tasks`
+
+#### Body parameters
+
+| Parameter     | Type     |  Description                          |
 | ------------- | -------- | ----------------------------------- |
 | `title`       | `string` | **Obrigatório**. Título da tarefa.                   |
 | `description` | `string` | **Obrigatório**. Descrição detalhada da tarefa.      |
 
-#### Exemplo de Solicitação
+### Example Body
+
 ```http
 POST /tasks HTTP/1.1
 Host: exemplo.com
 Content-Type: application/json
 
 {
-    "title": "Título da Tarefa",
-    "description": "Descrição detalhada da tarefa"
+  "title": "Título da Tarefa",
+  "description": "Descrição detalhada da tarefa"
+}
+```
+
+### Example Response
+
+#### Resolve (Status Code 201)
+```json
+
+```
+
+#### Reject (Status Code 400)
+
+```json
+{
+  "error": "Title and description are required & must be string"
+}
+```
+
+#### Reject (Status Code 404)
+
+```json
+{
+  "error": "Resource not found"
 }
 ```
 
@@ -112,5 +207,5 @@ Content-Type: application/json
 #### Parâmetros do Corpo
 
 | Parâmetro     | Tipo     |  Descrição                          |
-| ------------- | -------- | ----------------------------------- |
+| ------------- | -------- | ----------------------------------- |   |
 | `id` | `string` | **Obrigatório**. ID da task para a edição|
