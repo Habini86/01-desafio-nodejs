@@ -50,12 +50,12 @@ export const routes = [
     handler: (req, res) => {
       const tasks = req.body;
 
+      if (tasks === null) {
+        return res.writeHead(400).end('{"error": "text/plain formatted error"}')
+      }
+
       for (const task of tasks) {
         const { title, description } = task;
-
-        if (!(typeof(title) === 'string' && typeof(description) === 'string')) {
-          return res.writeHead(400).end('{"error": "Title and description are required & must be string"}')
-        }
 
         const newTask = {
           id: randomUUID(),

@@ -23,7 +23,6 @@ export default class Database {
     let data = this.#database[table] ?? []
 
     if(typeof searchOrId === 'object') { 
-      console.log(searchOrId)
       if(searchOrId) {
         data = data.filter(row => {
           return Object.entries(searchOrId).some(([key, value]) => {
