@@ -3,7 +3,7 @@
 Foi desenvolvido uma API para realizar o CRUD de tasks (tarefas).
 
  - [Fonte do desafio](https://efficient-sloth-d85.notion.site/Desafio-01-2d48608f47644519a408b438b52d913f)
- 
+
 # Documentação da API
 
 ## Jsons utilizados como exemplos
@@ -52,7 +52,7 @@ Foi desenvolvido uma API para realizar o CRUD de tasks (tarefas).
 | Task 05    | Descrição da Task 05 |
 
 ### Passar o CSV no Post
-```http
+```text
 title,description
 Task 01,Descrição da Task 01
 Task 02,Descrição da Task 02
